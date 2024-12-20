@@ -1,0 +1,7 @@
+App\Entity\Reply:
+  reply_{1..20}:
+    content: <paragraphs(2, true)>
+    createdAt: <dateTimeBetween('-1 years', 'now')>
+    updatedAt: <dateTimeBetween('-6 months', 'now')>
+    author: '@user_<numberBetween(1,5)>'
+    topic: '@topic_<numberBetween(1,10)>'

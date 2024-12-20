@@ -1,0 +1,12 @@
+App\Entity\Category:
+  category_1:
+    name: "General Discussion"
+    description: "Topics related to general discussions."
+
+  category_2:
+    name: "Support"
+    description: "Technical and community support topics."
+
+  category_3:
+    name: "Feedback"
+    description: "Suggestions and feedback from the community."
