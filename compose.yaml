@@ -1,17 +1,21 @@
+version: '3.8'
+
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8001:8000" # Map Symfony's built-in server to localhost:8000
+      - "8001:8000"
     volumes:
-      - .:/app:cached # Sync project files for live updates
+      - .:/app:cached
     depends_on:
       - db
+      - mailhog
     environment:
       APP_ENV: dev
       DATABASE_URL: "postgresql://symfony:symfony@db:5432/symfony"
+      MAILER_DSN: smtp://mailhog:1025
 
   db:
     image: postgres:15
@@ -25,7 +29,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "8080:80" # Nginx on localhost:8080
+      - "8080:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - .:/app:cached
@@ -35,9 +39,19 @@ services:
   adminer:
     image: adminer:latest
     ports:
-      - "8081:8080" # Adminer on localhost:8081
+      - "8081:8080"
     environment:
-      ADMINER_DEFAULT_SERVER: db # Nom du service de la base de données dans Docker
+      ADMINER_DEFAULT_SERVER: db
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "8025:8025"  # Interface Mailhog sur localhost:8025
+      - "1025:1025"  # SMTP sur localhost:1025
+    environment:
+      MH_UI_BIND_ADDR: 0.0.0.0:8025
+      MH_API_BIND_ADDR: 0.0.0.0:8025
 
 volumes:
   db-data:

@@ -1,28 +1,32 @@
-# Use a lightweight PHP image with CLI support
+# Utiliser une image légère PHP avec support CLI
 FROM php:8.2-cli
 
-# Install necessary extensions and tools
+# Installer les extensions nécessaires et les outils
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
     libpq-dev \
+    supervisor \
     && docker-php-ext-install pdo pdo_pgsql
 
-# Install Composer
+# Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set the working directory
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copy project files
+# Copier les fichiers du projet
 COPY . /app
 
-# Install Symfony dependencies
+# Installer les dépendances Symfony
 RUN composer install --no-interaction --optimize-autoloader
 
-# Expose port for development server
+# Copier le fichier de configuration supervisord
+COPY ./docker/supervisord.conf /etc/supervisor/supervisord.conf
+
+# Exposer le port pour le serveur de développement
 EXPOSE 8000
 
-# Default command to start the Symfony built-in server
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+# Démarrer supervisord par défaut
+CMD ["/usr/bin/supervisord"]

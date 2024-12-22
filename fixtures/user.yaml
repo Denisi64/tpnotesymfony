@@ -1,9 +1,11 @@
 App\Entity\User:
   admin_1:
     email: "admin@example.com"
-    password: admin
+    password: "admin"
     roles: ['ROLE_ADMIN']
     username: "admin"
+    name: "Admin"
+    surname: "Admin"
     createdAt: <dateTimeBetween('-2 years', 'now')>
     updatedAt: <dateTimeBetween('-1 years', 'now')>
 
@@ -12,5 +14,7 @@ App\Entity\User:
     password: <password()>
     roles: ['ROLE_USER']
     username: <username()>
+    name: <firstName()>
+    surname: <lastName()>
     createdAt: <dateTimeBetween('-2 years', 'now')>
     updatedAt: <dateTimeBetween('-1 years', 'now')>
