@@ -47,10 +47,6 @@
                         <td class="px-4 py-2 text-sm text-gray-700">{{ topic.createdAt ? topic.createdAt|date('Y-m-d') : '' }}</td>
                         <td class="px-4 py-2 text-sm text-gray-700">{{ topic.updatedAt ? topic.updatedAt|date('Y-m-d') : '' }}</td>
                         <td class="px-4 py-2 text-sm text-gray-700">
-                            <a href="{{ path('app_topic_show', {'id': topic.id}) }}" class="inline-block text-blue-600 hover:text-blue-800 transition duration-200">
-                                <i class="fas fa-eye mr-2"></i>Show
-                            </a>
-                            |
                             <a href="{{ path('app_topic_edit', {'id': topic.id}) }}" class="inline-block text-yellow-600 hover:text-yellow-800 transition duration-200">
                                 <i class="fas fa-edit mr-2"></i>Edit
                             </a>

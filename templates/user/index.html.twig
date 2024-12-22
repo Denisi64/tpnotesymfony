@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}ForumInfinite - Topic{% endblock %}</title>
+    <title>{% block title %}ForumInfinite - User{% endblock %}</title>
 
     {# Import Tailwind CSS #}
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -55,7 +55,6 @@
                     <td class="px-4 py-2 text-sm text-gray-700">{{ user.name }}</td>
                     <td class="px-4 py-2 text-sm text-gray-700">{{ user.surname }}</td>
                     <td class="px-4 py-2 text-sm text-gray-700">
-                        <a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-blue-600 hover:text-blue-800 transition duration-200">Show</a> |
                         <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-yellow-600 hover:text-yellow-800 transition duration-200">Edit</a> |
                         <form action="{{ path('app_user_ban', {'id': user.id}) }}" method="post" style="display:inline;">
                             <button type="submit" class="text-red-600 hover:text-red-800 transition duration-200">
