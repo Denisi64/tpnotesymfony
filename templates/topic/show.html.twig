@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ topic.title }}{% endblock %}</title>
+
+    {# Import Tailwind CSS #}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+<header>
+    {% include 'parts/navbar.html.twig' %}
+</header>
+
+<main class="container mx-auto p-6">
+    <h1 class="text-3xl font-semibold mb-6">{{ topic.title }}</h1>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <p class="text-gray-700">{{ topic.content }}</p>
+        <p class="text-sm text-gray-500 mt-4">Posté le : {{ topic.createdAt|date('Y-m-d H:i') }}</p>
+    </div>
+
+    <div class="mt-8">
+        <h2 class="text-2xl font-semibold mb-4">Réponses</h2>
+
+        {% if replies is not empty %}
+            <div class="space-y-4">
+                {% for reply in replies %}
+                    <div class="bg-white p-4 rounded-lg shadow-lg">
+                        <p class="text-gray-700">{{ reply.content }}</p>
+                        <p class="text-sm text-gray-500 mt-2">Répondu le : {{ reply.createdAt|date('Y-m-d H:i') }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Aucune réponse pour ce topic.</p>
+        {% endif %}
+    </div>
+
+    <a href="{{ path('app_home') }}" class="inline-block mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        Retour à l'accueil
+    </a>
+</main>
+
+<footer class="text-center text-gray-500 p-4">
+    &copy; {{ "now"|date("Y") }} ForumInfinite
+</footer>
+
+{# Import le JavaScript #}
+<script src="{{ asset('build/runtime.js') }}" defer></script>
+<script src="{{ asset('build/app.js') }}" defer></script>
+</body>
+</html>

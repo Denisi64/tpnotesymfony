@@ -1,4 +1,5 @@
 <?php
+// src/Repository/ReplyRepository.php
 
 namespace App\Repository;
 
@@ -6,9 +7,6 @@ use App\Entity\Reply;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Reply>
- */
 class ReplyRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,28 +14,15 @@ class ReplyRepository extends ServiceEntityRepository
         parent::__construct($registry, Reply::class);
     }
 
-    //    /**
-    //     * @return Reply[] Returns an array of Reply objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('r.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Reply
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    // Fonction pour récupérer les réponses d'un topic
+    public function findByTopic($topic)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.topic = :topic')
+            ->setParameter('topic', $topic)
+            ->orderBy('r.createdAt', 'ASC') // Trie par date de création
+            ->getQuery()
+            ->getResult();
+    }
 }
+
