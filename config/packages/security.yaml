@@ -22,6 +22,7 @@ security:
 
             logout:
                 path: app_logout
+                target: /
                 # where to redirect after logout
                 # target: app_any_route
 
@@ -33,7 +34,16 @@ security:
     # Contrôles d'accès
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_ADMIN }
+        - { path: ^/topic, roles: ROLE_ADMIN }
+        - { path: ^/language, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/banned, roles: ROLE_BANNED }
+
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN: ROLE_USER
+        ROLE_BANNED:
 
 # Configuration pour l'environnement de test
 when@test:

@@ -16,4 +16,13 @@ class HomeController extends AbstractController
             'title' => 'Bienvenue sur ma page d\'accueil'
         ]);
     }
+
+    #[Route('/banned', name: 'app_banned')]
+    public function banned(): Response
+    {
+        return $this->render('security/banned.html.twig', [
+            'message' => 'Votre compte a été banni.',
+        ]);
+    }
+
 }

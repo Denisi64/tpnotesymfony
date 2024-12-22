@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const ROLE_BANNED = 'ROLE_BANNED';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -247,5 +248,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function setIsBanned(bool $isBanned): self
+    {
+        if ($isBanned) {
+            // On remplace les rôles existants par ["ROLE_BANNED"]
+            $this->roles = ['ROLE_BANNED'];
+        } else {
+            // Si on "dé-bannit", on remet le rôle par défaut ["ROLE_USER"]
+            $this->roles = ['ROLE_USER'];
+        }
+
+        return $this;
+    }
+
+
+
+
 
 }

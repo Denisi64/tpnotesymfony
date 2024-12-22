@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ForumInfinite - Profile{% endblock %}</title>
+
+    {# Import Tailwind CSS #}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+<header>
+    {% include 'parts/navbar.html.twig' %}
+</header>
+
+<main class="container mx-auto p-4">
+    {% block body %}
+        <div class="max-w-sm mx-auto bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-lg">
+            <div class="p-4">
+                <h2 class="text-lg font-bold text-gray-900 truncate">
+                    {{ user.name }} {{ user.surname }}
+                </h2>
+                <p class="text-sm text-gray-500 mt-2 line-clamp-3">
+                    {{ user.email }}
+                </p>
+            </div>
+            <div class="flex items-center justify-between p-4 border-t border-gray-200 bg-gray-50">
+                <div class="flex items-center space-x-2">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700">{{ user.name }} {{ user.surname }}</p>
+                        <p class="text-xs text-gray-500">Inscrit le {{ user.createdAt|date('Y/m/d') }}</p>
+                    </div>
+                </div>
+                <a href="{{ path('app_logout') }}" class="text-blue-500 hover:underline text-sm">
+                    Déconnexion
+                </a>
+            </div>
+        </div>
+    {% endblock %}
+</main>
+
+</body>
+</html>

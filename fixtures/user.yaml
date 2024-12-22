@@ -9,6 +9,16 @@ App\Entity\User:
     createdAt: <dateTimeBetween('-2 years', 'now')>
     updatedAt: <dateTimeBetween('-1 years', 'now')>
 
+  user_test:
+    email: "test@example.com"
+    password: "test"
+    roles: ['ROLE_USER']
+    username: "test"
+    name: "Test"
+    surname: "Test"
+    createdAt: <dateTimeBetween('-2 years', 'now')>
+    updatedAt: <dateTimeBetween('-1 years', 'now')>
+
   user_{1..5}:
     email: <email()>
     password: <password()>

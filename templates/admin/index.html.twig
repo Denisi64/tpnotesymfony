@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ForumInfinite - Admin{% endblock %}</title>
+
+    {# Import Tailwind CSS #}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+<header>
+    {% include 'parts/navbar.html.twig' %}
+</header>
+
+{% block body %}
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-semibold text-center mb-8">Admin Dashboard</h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Bouton pour gérer les utilisateurs -->
+            <div class="flex justify-center">
+                <a href="{{ path('app_user_index') }}" class="w-full max-w-xs px-6 py-8 bg-blue-600 text-white rounded-lg shadow-lg text-center hover:bg-blue-700 transition duration-300">
+                    <svg class="h-12 w-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a7 7 0 100-14 7 7 0 000 14zm0 2a9 9 0 110-18 9 9 0 010 18z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="font-medium">Gérer les utilisateurs</span>
+                </a>
+            </div>
+
+            <!-- Bouton pour gérer les topics -->
+            <div class="flex justify-center">
+                <a href="{{ path('app_topic_index') }}" class="w-full max-w-xs px-6 py-8 bg-green-600 text-white rounded-lg shadow-lg text-center hover:bg-green-700 transition duration-300">
+                    <svg class="h-12 w-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a7 7 0 100-14 7 7 0 000 14zm0 2a9 9 0 110-18 9 9 0 010 18z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="font-medium">Gérer les topics</span>
+                </a>
+            </div>
+
+            <!-- Bouton pour gérer les langues -->
+            <div class="flex justify-center">
+                <a href="{{ path('app_language_index') }}" class="w-full max-w-xs px-6 py-8 bg-purple-600 text-white rounded-lg shadow-lg text-center hover:bg-purple-700 transition duration-300">
+                    <svg class="h-12 w-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a7 7 0 100-14 7 7 0 000 14zm0 2a9 9 0 110-18 9 9 0 010 18z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="font-medium">Gérer les langues</span>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+</body>
+</html>
