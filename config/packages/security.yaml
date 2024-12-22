@@ -36,6 +36,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_ADMIN }
         - { path: ^/topic, roles: ROLE_ADMIN }
+        - { path: ^/show, roles: ROLE_USER }
         - { path: ^/language, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/banned, roles: ROLE_BANNED }

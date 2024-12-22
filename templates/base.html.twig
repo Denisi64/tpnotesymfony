@@ -23,7 +23,7 @@
                     <h3 class="text-xl font-semibold text-gray-800">{{ topic.title }}</h3>
                     <p class="text-gray-600 mt-2">{{ topic.content|slice(0, 150) ~ '...' }}</p>
                     {% if app.user %}
-                    <a href="{{ path('app_topic_show', {'id': topic.id}) }}" class="inline-block mt-4 text-blue-600 hover:text-blue-800">
+                        <a href="{{ path('app_topic_show', {'id': topic.id}) }}" class="inline-block mt-4 text-blue-600 hover:text-blue-800">
                         Voir plus
                     </a>
                     {% endif %}

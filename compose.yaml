@@ -16,7 +16,8 @@ services:
       APP_ENV: dev
       DATABASE_URL: "postgresql://symfony:symfony@db:5432/symfony"
       MAILER_DSN: smtp://mailhog:1025
-
+    networks:
+      - app-network
   db:
     image: postgres:15
     environment:
@@ -25,6 +26,8 @@ services:
       POSTGRES_DB: symfony
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
   nginx:
     image: nginx:latest
@@ -35,6 +38,8 @@ services:
       - .:/app:cached
     depends_on:
       - web
+    networks:
+      - app-network
 
   adminer:
     image: adminer:latest
@@ -42,6 +47,8 @@ services:
       - "8081:8080"
     environment:
       ADMINER_DEFAULT_SERVER: db
+    networks:
+      - app-network
 
   mailhog:
     image: mailhog/mailhog
@@ -52,6 +59,12 @@ services:
     environment:
       MH_UI_BIND_ADDR: 0.0.0.0:8025
       MH_API_BIND_ADDR: 0.0.0.0:8025
+    networks:
+      - app-network
 
 volumes:
   db-data:
+
+networks:
+  app-network:
+    driver: bridge

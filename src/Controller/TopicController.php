@@ -1,7 +1,10 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Reply;
 use App\Entity\Topic;
+use App\Form\ReplyType;
+use App\Form\ReplyTypeTopic;
 use App\Form\TopicType;
 use App\Repository\ReplyRepository;
 use App\Repository\TopicRepository;
@@ -14,6 +17,16 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/topic')]
 final class TopicController extends AbstractController
 {
+
+    // Déclarez une propriété pour l'EntityManagerInterface
+    private EntityManagerInterface $entityManager;
+
+    // Injectez l'EntityManagerInterface dans le constructeur
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        // Assurez-vous que l'EntityManager est bien injecté
+        $this->entityManager = $entityManager;
+    }
     #[Route(name: 'app_topic_index', methods: ['GET'])]
     public function index(TopicRepository $topicRepository): Response
     {
@@ -70,23 +83,4 @@ final class TopicController extends AbstractController
         return $this->redirectToRoute('app_topic_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/topic/{id}', name: 'app_topic_show')]
-    public function show(int $id, TopicRepository $topicRepository, ReplyRepository $replyRepository): Response
-    {
-        // Récupère le topic avec l'id spécifié
-        $topic = $topicRepository->find($id);
-
-        if (!$topic) {
-            throw $this->createNotFoundException('Topic not found');
-        }
-
-        // Récupère toutes les réponses (replies) liées à ce topic
-        $replies = $replyRepository->findBy(['topic' => $topic]);
-
-        // Passe les données (topic et replies) à la vue Twig
-        return $this->render('topic/show.html.twig', [
-            'topic' => $topic,
-            'replies' => $replies,
-        ]);
-    }
 }

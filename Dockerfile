@@ -25,8 +25,9 @@ RUN composer install --no-interaction --optimize-autoloader
 # Copier le fichier de configuration supervisord
 COPY ./docker/supervisord.conf /etc/supervisor/supervisord.conf
 
-# Exposer le port pour le serveur de développement
+# Exposer les ports nécessaires
 EXPOSE 8000
+EXPOSE 9000
 
 # Démarrer supervisord par défaut
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
